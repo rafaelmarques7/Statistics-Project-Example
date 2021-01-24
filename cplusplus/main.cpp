@@ -1,12 +1,15 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
+#include <sstream>
+#include <algorithm>
 using namespace std;
 
-struct student {
+struct sstudent {
   string name;
   float grade;
-}
+};
 
 int main () 
 {
@@ -18,7 +21,26 @@ int main ()
   {
     while (getline (gradesFile, line)) 
     {
-      cout << line << "\n";
+      istringstream ss(line);
+      string token;
+
+      sstudent student; 
+      string studentName;
+      float studentGrade;
+
+      int wordPosition = 0;
+      while(getline(ss, token, ',')) {
+        if (wordPosition == 0) {
+          student.name = token;
+        } else {
+          token.erase(remove_if(token.begin(), token.end(), ::isspace), token.end()); // remove whitespace
+          student.grade = stof(token);
+          wordPosition = 0;
+        }
+        wordPosition += 1;
+      }
+      
+      cout << student.name << ' ' << student.grade << '\n';
     }
     gradesFile.close();
   } else {
