@@ -4,6 +4,8 @@
 #include <vector>
 #include <sstream>
 #include <algorithm>
+#include <chrono>
+#include <math.h>
 using namespace std;
 
 struct sstudent {
@@ -18,6 +20,26 @@ float calculateAverage(vector<int>& array, int numElements) {
   }
   float average = (float)sum / numElements;
   return average;
+}
+
+float calculateVariance(vector<int>&array, int numElements) {
+  float sumSquaresDiff = 0; // numerator
+  float squareDiff;         // temp variable placeholder
+  float mean = calculateAverage(array, numElements);
+
+  for (int i=0; i<numElements; i++) {
+    squareDiff = (array[i]-mean);   // split out the heavy compute operation into two,
+    squareDiff *= squareDiff;       // and reuse temp variable (faster)
+    sumSquaresDiff += squareDiff;
+  }
+  float variance = sumSquaresDiff / (numElements-1);
+  return variance;
+}
+
+float calculateStandardDeviation(vector<int>&array, int numElements) {
+  float variance = calculateVariance(array, numElements);
+  float std = sqrt(variance);
+  return std;
 }
 
 int main () 
@@ -59,16 +81,18 @@ int main ()
     return 0;
   }
 
+  // create array of all students grades
   vector<int> studentGrades;
-
-  // print all student data in students vector
   for (auto i = studentsVector.begin(); i != studentsVector.end(); ++i) {
-    // cout << (*i).name << " " << (*i).grade << "\n"; 
     studentGrades.push_back((*i).grade);
   }
 
   int numElements = studentGrades.size();
   float average = calculateAverage(studentGrades, numElements);
+  float variance = calculateVariance(studentGrades, numElements);
+  float std = calculateStandardDeviation(studentGrades, numElements);
 
   cout << "average grade: " << average << '\n';
+  cout << "variance: " << variance << '\n';
+  cout << "standard deviation: " << std << '\n';
 }
