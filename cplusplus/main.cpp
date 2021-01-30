@@ -32,7 +32,7 @@ float calculateVariance(vector<int>&array, int numElements) {
     squareDiff *= squareDiff;       // and reuse temp variable (faster)
     sumSquaresDiff += squareDiff;
   }
-  float variance = sumSquaresDiff / (numElements-1);
+  float variance = sumSquaresDiff / (numElements);
   return variance;
 }
 
@@ -40,6 +40,20 @@ float calculateStandardDeviation(vector<int>&array, int numElements) {
   float variance = calculateVariance(array, numElements);
   float std = sqrt(variance);
   return std;
+}
+
+int calculateMode(vector<int>&array, int numElements) {
+  bool isEven = (numElements % 2) == 0;
+  int mode;
+  if (isEven) {
+    // return average of two middle elements
+    int x1 = array[numElements/2 - 1];
+    int x2 = array[numElements/2];
+  } else {
+    // return the element in the middle of the array
+    mode = array[numElements/2 ]; // x/2 is rounded down to nearest int, because x is int  
+  }
+  return mode;
 }
 
 int main () 
@@ -91,8 +105,10 @@ int main ()
   float average = calculateAverage(studentGrades, numElements);
   float variance = calculateVariance(studentGrades, numElements);
   float std = calculateStandardDeviation(studentGrades, numElements);
+  int mode = calculateMode(studentGrades, numElements);
 
   cout << "average grade: " << average << '\n';
   cout << "variance: " << variance << '\n';
   cout << "standard deviation: " << std << '\n';
+  cout << "mode: " << mode << '\n';
 }

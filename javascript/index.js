@@ -31,9 +31,6 @@ const arrayGrades = Object.keys(contentObject).map(studentName => {
   return contentObject[studentName]
 })
 
-const average = calculateAverage(arrayGrades)
-console.log('average: ', average)
-
 function calculateMode(arrayNumbers) {
   const sortedArrayNumbers = arrayNumbers.sort()
   const numElements = sortedArrayNumbers.length
@@ -51,9 +48,6 @@ function calculateMode(arrayNumbers) {
   }
 }
 
-const mode = calculateMode(arrayGrades)
-console.log('mode: ', mode)
-
 function calculateVariance(arrayNumbers) {
   const average = calculateAverage(arrayNumbers)
 
@@ -63,7 +57,7 @@ function calculateVariance(arrayNumbers) {
     summSquareDifferences += squareDiff
   })
 
-  const variance = summSquareDifferences / (arrayNumbers.length - 1)
+  const variance = summSquareDifferences / (arrayNumbers.length)
   return variance
 }
 
@@ -72,5 +66,12 @@ function calculateStandardDeviation(arrayNumbers) {
   return Math.sqrt(variance)
 }
 
-const standardDeviation = calculateStandardDeviation(arrayGrades)
-console.log('standardDeviation: ', standardDeviation)
+const average = calculateAverage(arrayGrades)
+const std = calculateStandardDeviation(arrayGrades)
+const variance = calculateVariance(arrayGrades)
+const mode = calculateMode(arrayGrades)
+
+console.log('average: ', average)
+console.log('standardDeviation: ', std)
+console.log('variance: ', variance)
+console.log('mode: ', mode)
