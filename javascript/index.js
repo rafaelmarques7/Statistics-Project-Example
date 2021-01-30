@@ -32,7 +32,9 @@ const arrayGrades = Object.keys(contentObject).map(studentName => {
 })
 
 function calculateMode(arrayNumbers) {
-  const sortedArrayNumbers = arrayNumbers.sort()
+  const sortedArrayNumbers = [...arrayNumbers] // copy array
+  sortedArrayNumbers.sort((a, b) => a - b) // sort modifies inline
+
   const numElements = sortedArrayNumbers.length
   const hasEvenNumberOfElements = numElements % 2 === 0
 

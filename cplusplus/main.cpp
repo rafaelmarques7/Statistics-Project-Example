@@ -42,16 +42,32 @@ float calculateStandardDeviation(vector<int>&array, int numElements) {
   return std;
 }
 
-int calculateMode(vector<int>&array, int numElements) {
+float calculateMode(vector<int>&array, int numElements) {
+  float mode;
+  
+  // copy of the original array, as to not modify it
+  vector<int> sortedArray = array;
+  
+  // sort vector, this modifies the array
+  sort(sortedArray.begin(), sortedArray.end());
+
+  for (int i=0; i<numElements; i++) {
+    cout << sortedArray[i] << " ";
+  }
+  cout << "\n";
+
   bool isEven = (numElements % 2) == 0;
-  int mode;
   if (isEven) {
+    cout << numElements/2 << numElements/2 -1 << "here is even\n";
     // return average of two middle elements
-    int x1 = array[numElements/2 - 1];
-    int x2 = array[numElements/2];
+    int x1 = sortedArray[numElements/2 - 1];
+    int x2 = sortedArray[numElements/2];
+    
+    cout << x1 << x2 << "\n";
+    mode = (float(x1) + float(x2)) / 2;
   } else {
     // return the element in the middle of the array
-    mode = array[numElements/2 ]; // x/2 is rounded down to nearest int, because x is int  
+    mode = float(sortedArray[numElements/2]); // x/2 is rounded down to nearest int, because x is int  
   }
   return mode;
 }
@@ -105,7 +121,7 @@ int main ()
   float average = calculateAverage(studentGrades, numElements);
   float variance = calculateVariance(studentGrades, numElements);
   float std = calculateStandardDeviation(studentGrades, numElements);
-  int mode = calculateMode(studentGrades, numElements);
+  float mode = calculateMode(studentGrades, numElements);
 
   cout << "average grade: " << average << '\n';
   cout << "variance: " << variance << '\n';
