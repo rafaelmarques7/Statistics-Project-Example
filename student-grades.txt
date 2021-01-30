@@ -5,7 +5,7 @@ Student_4, 12
 Student_5, 8
 Student_6, 4
 Student_7, 12
-Student_8, 15
+Student_8, 7
 Student_9, 20
 Student_10, 19
 Student_11, 11
