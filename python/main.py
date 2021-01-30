@@ -39,8 +39,20 @@ def calculateStandardDeviation(studentData):
   return std
 
 def calculateMode(studentData):
+  studentGrades = studentData.values()
+  sortedGrades = sorted(studentGrades)
+
   numElements = len(studentData.items())
+  isEven = (numElements % 2) == 0
   
+  if (isEven):
+    # return the average of the middle two elements
+    x1 = sortedGrades[int(numElements/2) - 1]
+    x2 = sortedGrades[int(numElements/2)]
+    return (x1 + x2) / 2
+  else:
+    # return value in the middle
+    return sortedGrades[math.floor(numElements/2)]  
 
 studentData = readStudentData()
 
