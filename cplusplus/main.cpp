@@ -51,19 +51,11 @@ float calculateMode(vector<int>&array, int numElements) {
   // sort vector, this modifies the array
   sort(sortedArray.begin(), sortedArray.end());
 
-  for (int i=0; i<numElements; i++) {
-    cout << sortedArray[i] << " ";
-  }
-  cout << "\n";
-
   bool isEven = (numElements % 2) == 0;
   if (isEven) {
-    cout << numElements/2 << numElements/2 -1 << "here is even\n";
     // return average of two middle elements
     int x1 = sortedArray[numElements/2 - 1];
     int x2 = sortedArray[numElements/2];
-    
-    cout << x1 << x2 << "\n";
     mode = (float(x1) + float(x2)) / 2;
   } else {
     // return the element in the middle of the array
